@@ -69,6 +69,13 @@ const BlogPostCard = ({ index, post, showSummary, siteInfo }) => {
 
             <div className='text-gray-800 justify-between flex my-2  dark:text-gray-300'>
               <div>
+              <SmartLink
+                  href={`/archive#${formatDateFmt(post?.publishDate, 'MM-yyyy')}`}
+                  passHref
+                  className='font-light hover:underline cursor-pointer text-sm leading-4 mr-3'>
+                  <i className='far fa-clock mr-1' />
+                  {post.date?.start_date || post.lastEditedDay}
+                </SmartLink>
                 <TwikooCommentCount
                   post={post}
                   className='hover:underline cursor-pointer text-sm'

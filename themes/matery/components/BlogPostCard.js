@@ -74,7 +74,9 @@ const BlogPostCard = ({ index, post, showSummary, siteInfo }) => {
                   passHref
                   className='font-light hover:underline cursor-pointer text-sm leading-4 mr-3'>
                   <i className='far fa-clock mr-1' />
-                  {post.date?.start_date || post.lastEditedDay}
+                  {new Date(
+post.date?.start_date || post.lastEditedDay
+).toLocaleDateString('de-DE')}
                 </SmartLink>
                 <TwikooCommentCount
                   post={post}

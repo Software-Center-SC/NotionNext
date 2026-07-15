@@ -4,36 +4,35 @@ const CONFIG = {
   MATERY_HOME_BANNER_GREETINGS: [
     'Hi，我是一个程序员',
     'Hi，我是一个打工人',
-    'Hi，我是一个干饭人',
-    '欢迎来到我的博客🎉'
-  ], // 首页大图标语文字
+    'Bienvenidos al catalogo 🎉🎉'
+  ], // Iconos grandes y texto en la página de inicio
 
-  MATERY_HOME_NAV_BUTTONS: true, // 首页是否显示分类大图标按钮
-  MATERY_HOME_NAV_BACKGROUND_IMG_FIXED: false, // 首页背景图滚动时是否固定，true 则滚动时图片不懂； false则随鼠标滚动
+  MATERY_HOME_NAV_BUTTONS: true, // ¿Deberían mostrarse los botones con iconos de categorías grandes en la página de inicio?
+  MATERY_HOME_NAV_BACKGROUND_IMG_FIXED: false, // Indica si la imagen de fondo de la página de inicio permanece fija al desplazarse: verdadero significa que la imagen no cambia durante el desplazamiento; falso significa que se desplaza con el ratón.
 
-  // 是否显示开始阅读按钮
+  // ¿Debería mostrarse el botón "Comenzar a leer"?
   MATERY_SHOW_START_READING: true,
 
-  // 菜单配置
-  MATERY_MENU_CATEGORY: true, // 显示分类
-  MATERY_MENU_TAG: true, // 显示标签
-  MATERY_MENU_ARCHIVE: true, // 显示归档
-  MATERY_MENU_SEARCH: true, // 显示搜索
+  // Configuración del menú
+  MATERY_MENU_CATEGORY: true, // Mostrar categorías
+  MATERY_MENU_TAG: true, // Mostrar etiquetas
+  MATERY_MENU_ARCHIVE: true, // Mostrar archivos
+  MATERY_MENU_SEARCH: true, // Mostrar búsqueda
 
-  MATERY_POST_LIST_COVER: true, // 文章封面
-  MATERY_POST_LIST_SUMMARY: true, // 文章摘要
-  MATERY_POST_LIST_PREVIEW: true, // 读取文章预览
+  MATERY_POST_LIST_COVER: true, // Portada del artículo
+  MATERY_POST_LIST_SUMMARY: true, // Resumen del artículo
+  MATERY_POST_LIST_PREVIEW: true, // Lea la vista previa del artículo
 
-  MATERY_ARTICLE_ADJACENT: true, // 显示上一篇下一篇文章推荐
-  MATERY_ARTICLE_COPYRIGHT: true, // 文章版权声明：true 全部显示；false 全部关闭；custom 仅填写 copyright 时显示
-  MATERY_ARTICLE_NOT_BY_AI: false, // 显示非AI写作
-  MATERY_ARTICLE_RECOMMEND: true, // 文章关联推荐
+  MATERY_ARTICLE_ADJACENT: true, // Mostrar artículo anterior, artículo siguiente, recomendaciones
+  MATERY_ARTICLE_COPYRIGHT: false, // Aviso de derechos de autor del artículo: verdadero Mostrar todo; falso Ocultar todo; personalizado Mostrar solo cuando se ingresen los derechos de autor.
+  MATERY_ARTICLE_NOT_BY_AI: false, // Mostrar escritura no generada por IA
+  MATERY_ARTICLE_RECOMMEND: true, // Artículos relacionados
 
-  MATERY_WIDGET_LATEST_POSTS: true, // 显示最新文章卡
-  MATERY_WIDGET_ANALYTICS: false, // 显示统计卡
+  MATERY_WIDGET_LATEST_POSTS: true, // Mostrar tarjeta de artículos más recientes
+  MATERY_WIDGET_ANALYTICS: false, // Tarjeta de estadísticas de visualización
   MATERY_WIDGET_TO_TOP: true,
-  MATERY_WIDGET_TO_COMMENT: true, // 跳到评论区
-  WIDGET_DARK_MODE: true, // 夜间模式
-  MATERY_WIDGET_TOC: true // 移动端悬浮目录
+  MATERY_WIDGET_TO_COMMENT: false, // 跳到评论区
+  WIDGET_DARK_MODE: true, // Modo nocturno
+  MATERY_WIDGET_TOC: true // Directorio flotante móvil
 }
 export default CONFIG

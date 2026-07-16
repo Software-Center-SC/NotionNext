@@ -33,7 +33,7 @@ const BlogPostCard = ({ index, post, showSummary, siteInfo }) => {
       data-aos-anchor-placement='top-bottom'
       className='w-full mb-4 overflow-hidden shadow-md border dark:border-black rounded-xl bg-white dark:bg-hexo-black-gray'>
       {/* 固定高度 ，空白用图片拉升填充 */}
-      <header className='group flex flex-col h-80 justify-between'>
+      <header className='group flex flex-col h-72 justify-between'>
         {/* 头部图片 填充卡片 */}
         {showPageCover && (
           <SmartLink href={post?.href} passHref legacyBehavior>

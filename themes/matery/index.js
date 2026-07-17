@@ -113,8 +113,8 @@ const LayoutBase = props => {
           <Live2D />
         </div>
 
-        {/* 右下角悬浮 */}
-        <RightFloatButtons {...props} floatRightBottom={floatRightBottom} />
+        {/* 右下角悬浮 (Botones flotantes ocultos) */}
+        {/* <RightFloatButtons {...props} floatRightBottom={floatRightBottom} /> */}
 
         {/* 全文搜索 */}
         <AlgoliaSearchModal cRef={searchModal} {...props} />

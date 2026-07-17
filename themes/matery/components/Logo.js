@@ -9,7 +9,7 @@ const Logo = props => {
       <div className='flex items-center cursor-pointer space-x-3'>
 
         <img
-          src='/SC_logo.png'
+          src='/logo.png'
           alt='Logo'
           className='h-10 w-auto'
         />

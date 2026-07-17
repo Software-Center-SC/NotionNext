@@ -5,14 +5,12 @@ const Logo = props => {
   const { siteInfo } = props
 
   return (
-    /
-      <div className='flex items-center cursor-pointer space-x-3'>
-        logo.png'
-          alt='Logo'
+    <SmartLinkiv className='flex items-center cursor-pointer space-x-3'>
+        /logo.png='Logo'
           className='h-10 w-auto'
         />
 
-        <div className='text-lg hover:scale-110 transform duration-200'>
+        <div className='text-lg p-1.5 rounded dark:border-white hover:scale-110 transform duration-200'>
           {siteInfo?.title || siteConfig('TITLE')}
         </div>
       </div>

@@ -44,12 +44,12 @@ const BlogPostCard = ({ index, post, showSummary, siteInfo }) => {
                 className='h-full w-full group-hover:scale-125 group-hover:brightness-50 rounded-t-md transform object-cover duration-500'
               />
               <h2 className='absolute bottom-0 left-0 text-white p-2 md:p-4 text-sm md:text-lg replace line-clamp-2 leading-tight w-full shadow-text z-30'>
-  {siteConfig('POST_TITLE_ICON') && (
-    <NotionIcon icon={post.pageIcon} />
-  )}
-  {post.title}
-</h2>
-{/* 放在图片的阴影遮罩，便于突出文字 */}
+                {siteConfig('POST_TITLE_ICON') && (
+                  <NotionIcon icon={post.pageIcon} />
+                )}
+                {post.title}
+              </h2>
+              {/* 放在图片的阴影遮罩，便于突出文字 */}
               <div className='h-1/2 w-full absolute left-0 bottom-0 z-20 opacity-75 transition-all duration-200'>
                 <div className='h-full w-full absolute bg-gradient-to-b from-transparent to-black'></div>
               </div>
@@ -58,35 +58,32 @@ const BlogPostCard = ({ index, post, showSummary, siteInfo }) => {
         )}
 
         {/* 文字描述 */}
-        <main>
+        <main className='flex flex-col flex-grow'>
           {/* 描述 */}
-          <div className='px-4 flex flex-col w-full  text-gray-700  dark:text-gray-300'>
+          <div className='px-4 flex flex-col flex-grow w-full text-gray-700 dark:text-gray-300'>
             {(!showPreview || showSummary) && post.summary && (
-              <p className='replace my-1 text-sm font-light leading-5 line-clamp-2'>
+              <p className='hidden md:block replace my-1 text-sm font-light leading-5 line-clamp-2'>
                 {post.summary}
               </p>
             )}
 
-            <div className='text-gray-800 justify-between flex my-2  dark:text-gray-300'>
+            <div className='text-gray-800 justify-between flex my-2 items-end mt-auto dark:text-gray-300'>
               <div>
-              <SmartLink
-                href={`/archive#${formatDateFmt(post?.publishDate, 'MM-yyyy')}`}
-                 passHref
-                 className='font-light hover:underline cursor-pointer text-xs md:text-sm leading-4 mr-1 md:mr-3'>
+                <span className='font-light text-xs md:text-sm leading-4 mr-1 md:mr-3 flex items-center'>
                   <i className='far fa-clock mr-1' />
                   {new Date(post.date?.start_date || post.lastEditedDay)
-.toLocaleDateString('es-ES')
-.replaceAll('/', '.')}
-                </SmartLink>
+                    .toLocaleDateString('es-ES')
+                    .replaceAll('/', '.')}
+                </span>
                 <TwikooCommentCount
                   post={post}
                   className='hover:underline cursor-pointer text-sm'
                 />
               </div>
               <SmartLink
-              href={`/category/${post.category}`}
-              passHref
-              className='cursor-pointer font-light text-xs md:text-sm hover:underline hover:text-indigo-700 dark:hover:text-indigo-400 transform whitespace-nowrap'>
+                href={`/category/${post.category}`}
+                passHref
+                className='cursor-pointer font-light text-xs md:text-sm hover:underline hover:text-indigo-700 dark:hover:text-indigo-400 transform whitespace-nowrap'>
                 <i className='mr-1 far fa-folder' />
                 {post.category}
               </SmartLink>

@@ -32,18 +32,19 @@ const BlogPostCard = ({ index, post, showSummary, siteInfo }) => {
       data-aos-once='true'
       data-aos-anchor-placement='top-bottom'
       className='w-full mb-4 overflow-hidden shadow-md border dark:border-black rounded-xl bg-white dark:bg-hexo-black-gray'>
-      {/* 固定高度 ，空白用图片拉升填充 */}
-      <header className='group flex flex-col h-auto md:h-64 min-h-[16rem] justify-between'>
+      {/* Altura automática en móvil, fija en escritorio */}
+      <header className='group flex flex-col h-auto md:h-64 justify-between'>
         {/* 头部图片 填充卡片 */}
         {showPageCover && (
           <SmartLink href={post?.href} passHref legacyBehavior>
-            <div className='flex w-full h-40 relative duration-200 rounded-t-md cursor-pointer transform overflow-hidden'>
+            <div className='flex w-full h-40 md:h-48 relative duration-200 rounded-t-md cursor-pointer transform overflow-hidden'>
               <LazyImage
                 src={post?.pageCoverThumbnail}
                 alt={post.title}
                 className='h-full w-full group-hover:scale-125 group-hover:brightness-50 rounded-t-md transform object-cover duration-500'
               />
-              <h2 className='absolute bottom-0 left-0 text-white p-2 md:p-4 text-sm md:text-lg replace line-clamp-2 leading-tight w-full shadow-text z-30'>
+              {/* Uso de "truncate" para forzar una sola línea */}
+              <h2 className='absolute bottom-0 left-0 text-white p-2 md:p-4 text-sm md:text-lg truncate w-full shadow-text z-30'>
                 {siteConfig('POST_TITLE_ICON') && (
                   <NotionIcon icon={post.pageIcon} />
                 )}
@@ -59,8 +60,8 @@ const BlogPostCard = ({ index, post, showSummary, siteInfo }) => {
 
         {/* 文字描述 */}
         <main className='flex flex-col flex-grow'>
-          {/* 描述 */}
-          <div className='px-4 flex flex-col flex-grow w-full text-gray-700 dark:text-gray-300'>
+          {/* 描述 - Ajuste de padding a px-2 en móvil para alinear mejor */}
+          <div className='px-2 md:px-4 flex flex-col flex-grow w-full text-gray-700 dark:text-gray-300'>
             {(!showPreview || showSummary) && post.summary && (
               <p className='hidden md:block replace my-1 text-sm font-light leading-5 line-clamp-2'>
                 {post.summary}

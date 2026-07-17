@@ -43,13 +43,13 @@ const BlogPostCard = ({ index, post, showSummary, siteInfo }) => {
                 alt={post.title}
                 className='h-full w-full group-hover:scale-125 group-hover:brightness-50 rounded-t-md transform object-cover duration-500'
               />
-              <h2 className='absolute bottom-0 left-0 text-white p-4 text-xl replace break-words w-full shadow-text z-30 line-clamp-2'>
-                {siteConfig('POST_TITLE_ICON') && (
-                  <NotionIcon icon={post.pageIcon} />
-                )}
-                {post.title}
-              </h2>
-              {/* 放在图片的阴影遮罩，便于突出文字 */}
+              <h2 className='absolute bottom-0 left-0 text-white p-4 text-base md:text-lg replace line-clamp-2 leading-tight w-full shadow-text z-30'>
+  {siteConfig('POST_TITLE_ICON') && (
+    <NotionIcon icon={post.pageIcon} />
+  )}
+  {post.title}
+</h2>
+{/* 放在图片的阴影遮罩，便于突出文字 */}
               <div className='h-1/2 w-full absolute left-0 bottom-0 z-20 opacity-75 transition-all duration-200'>
                 <div className='h-full w-full absolute bg-gradient-to-b from-transparent to-black'></div>
               </div>

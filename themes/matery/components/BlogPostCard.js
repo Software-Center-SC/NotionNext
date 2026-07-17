@@ -33,7 +33,7 @@ const BlogPostCard = ({ index, post, showSummary, siteInfo }) => {
       data-aos-anchor-placement='top-bottom'
       className='w-full mb-4 overflow-hidden shadow-md border dark:border-black rounded-xl bg-white dark:bg-hexo-black-gray'>
       {/* 固定高度 ，空白用图片拉升填充 */}
-      <header className='group flex flex-col h-64 justify-between'>
+      <header className='group flex flex-col h-auto md:h-64 min-h-[16rem] justify-between'>
         {/* 头部图片 填充卡片 */}
         {showPageCover && (
           <SmartLink href={post?.href} passHref legacyBehavior>
@@ -43,7 +43,7 @@ const BlogPostCard = ({ index, post, showSummary, siteInfo }) => {
                 alt={post.title}
                 className='h-full w-full group-hover:scale-125 group-hover:brightness-50 rounded-t-md transform object-cover duration-500'
               />
-              <h2 className='absolute bottom-0 left-0 text-white p-4 text-base md:text-lg replace line-clamp-2 leading-tight w-full shadow-text z-30'>
+              <h2 className='absolute bottom-0 left-0 text-white p-2 md:p-4 text-sm md:text-lg replace line-clamp-2 leading-tight w-full shadow-text z-30'>
   {siteConfig('POST_TITLE_ICON') && (
     <NotionIcon icon={post.pageIcon} />
   )}
@@ -70,9 +70,9 @@ const BlogPostCard = ({ index, post, showSummary, siteInfo }) => {
             <div className='text-gray-800 justify-between flex my-2  dark:text-gray-300'>
               <div>
               <SmartLink
-                  href={`/archive#${formatDateFmt(post?.publishDate, 'MM-yyyy')}`}
-                  passHref
-                  className='font-light hover:underline cursor-pointer text-sm leading-4 mr-3'>
+                href={`/archive#${formatDateFmt(post?.publishDate, 'MM-yyyy')}`}
+                 passHref
+                 className='font-light hover:underline cursor-pointer text-xs md:text-sm leading-4 mr-1 md:mr-3'>
                   <i className='far fa-clock mr-1' />
                   {new Date(post.date?.start_date || post.lastEditedDay)
 .toLocaleDateString('es-ES')
@@ -84,9 +84,9 @@ const BlogPostCard = ({ index, post, showSummary, siteInfo }) => {
                 />
               </div>
               <SmartLink
-                href={`/category/${post.category}`}
-                passHref
-                className='cursor-pointer font-light text-sm hover:underline hover:text-indigo-700 dark:hover:text-indigo-400 transform'>
+              href={`/category/${post.category}`}
+              passHref
+              className='cursor-pointer font-light text-xs md:text-sm hover:underline hover:text-indigo-700 dark:hover:text-indigo-400 transform whitespace-nowrap'>
                 <i className='mr-1 far fa-folder' />
                 {post.category}
               </SmartLink>

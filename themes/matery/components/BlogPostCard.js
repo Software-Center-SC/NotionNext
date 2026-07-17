@@ -31,46 +31,49 @@ const BlogPostCard = ({ index, post, showSummary, siteInfo }) => {
       data-aos-delay={delay}
       data-aos-once='true'
       data-aos-anchor-placement='top-bottom'
-      className='w-full mb-4 overflow-hidden shadow-md border dark:border-black rounded-xl bg-white dark:bg-hexo-black-gray'>
-      {/* Altura automática en móvil, fija en escritorio */}
-      <header className='group flex flex-col h-auto md:h-64 justify-between'>
-        {/* 头部图片 填充卡片 */}
+      className='w-full mb-4 overflow-hidden shadow-md border dark:border-black rounded-xl bg-white dark:bg-hexo-black-gray flex flex-col h-full'>
+      
+      {/* Contenedor principal de la tarjeta */}
+      <header className='group flex flex-col h-full justify-between'>
+        
+        {/* 头部图片 填充卡片 (Solo la imagen, sin texto ni sombras) */}
         {showPageCover && (
           <SmartLink href={post?.href} passHref legacyBehavior>
-            <div className='flex w-full h-40 md:h-48 relative duration-200 rounded-t-md cursor-pointer transform overflow-hidden'>
+            <div className='flex w-full h-40 md:h-48 relative duration-200 rounded-t-md cursor-pointer transform overflow-hidden bg-gray-100 dark:bg-gray-800'>
               <LazyImage
                 src={post?.pageCoverThumbnail}
                 alt={post.title}
-                className='h-full w-full group-hover:scale-125 group-hover:brightness-50 rounded-t-md transform object-cover duration-500'
+                className='h-full w-full group-hover:scale-105 group-hover:brightness-90 rounded-t-md transform object-cover duration-500'
               />
-              {/* Uso de "truncate" para forzar una sola línea */}
-              <h2 className='absolute bottom-0 left-0 text-white p-2 md:p-4 text-sm md:text-lg truncate w-full shadow-text z-30'>
+            </div>
+          </SmartLink>
+        )}
+
+        {/* 文字描述 (Área blanca de texto) */}
+        <main className='flex flex-col flex-grow'>
+          <div className='p-3 md:p-4 flex flex-col flex-grow w-full text-gray-700 dark:text-gray-300'>
+            
+            {/* Título movido aquí abajo */}
+            <SmartLink href={post?.href} passHref legacyBehavior>
+              <h2 className='text-gray-900 dark:text-gray-100 text-sm md:text-base font-semibold line-clamp-2 leading-tight mb-2 cursor-pointer hover:text-indigo-600 dark:hover:text-indigo-400'>
                 {siteConfig('POST_TITLE_ICON') && (
                   <NotionIcon icon={post.pageIcon} />
                 )}
                 {post.title}
               </h2>
-              {/* 放在图片的阴影遮罩，便于突出文字 */}
-              <div className='h-1/2 w-full absolute left-0 bottom-0 z-20 opacity-75 transition-all duration-200'>
-                <div className='h-full w-full absolute bg-gradient-to-b from-transparent to-black'></div>
-              </div>
-            </div>
-          </SmartLink>
-        )}
+            </SmartLink>
 
-        {/* 文字描述 */}
-        <main className='flex flex-col flex-grow'>
-          {/* 描述 - Ajuste de padding a px-2 en móvil para alinear mejor */}
-          <div className='px-2 md:px-4 flex flex-col flex-grow w-full text-gray-700 dark:text-gray-300'>
+            {/* 描述 (Resumen oculto en móvil) */}
             {(!showPreview || showSummary) && post.summary && (
-              <p className='hidden md:block replace my-1 text-sm font-light leading-5 line-clamp-2'>
+              <p className='hidden md:block replace my-1 text-sm font-light leading-5 line-clamp-2 text-gray-600 dark:text-gray-400'>
                 {post.summary}
               </p>
             )}
 
-            <div className='text-gray-800 justify-between flex my-2 items-end mt-auto dark:text-gray-300'>
+            {/* Fecha y Categoría (Alineados siempre al fondo) */}
+            <div className='text-gray-500 dark:text-gray-400 justify-between flex mt-auto pt-3 items-end'>
               <div>
-                <span className='font-light text-xs md:text-sm leading-4 mr-1 md:mr-3 flex items-center'>
+                <span className='font-light text-xs leading-4 mr-1 md:mr-3 flex items-center'>
                   <i className='far fa-clock mr-1' />
                   {new Date(post.date?.start_date || post.lastEditedDay)
                     .toLocaleDateString('es-ES')
@@ -78,26 +81,26 @@ const BlogPostCard = ({ index, post, showSummary, siteInfo }) => {
                 </span>
                 <TwikooCommentCount
                   post={post}
-                  className='hover:underline cursor-pointer text-sm'
+                  className='hover:underline cursor-pointer text-xs'
                 />
               </div>
               <SmartLink
                 href={`/category/${post.category}`}
                 passHref
-                className='cursor-pointer font-light text-xs md:text-sm hover:underline hover:text-indigo-700 dark:hover:text-indigo-400 transform whitespace-nowrap'>
+                className='cursor-pointer font-medium text-xs hover:underline hover:text-indigo-600 dark:hover:text-indigo-400 transform whitespace-nowrap bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded'>
                 <i className='mr-1 far fa-folder' />
                 {post.category}
               </SmartLink>
             </div>
           </div>
 
+          {/* Tags (Si existen) */}
           {post?.tagItems && post?.tagItems.length > 0 && (
             <>
-              <hr />
-              <div className='text-gray-400 justify-between flex px-5 py-3'>
+              <hr className='border-gray-100 dark:border-gray-800' />
+              <div className='text-gray-400 justify-between flex px-4 py-2'>
                 <div className='md:flex-nowrap flex-wrap md:justify-start inline-block'>
                   <div>
-                    {' '}
                     {post.tagItems.map(tag => (
                       <TagItemMini key={tag.name} tag={tag} />
                     ))}

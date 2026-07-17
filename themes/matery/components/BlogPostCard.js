@@ -33,17 +33,17 @@ const BlogPostCard = ({ index, post, showSummary, siteInfo }) => {
       data-aos-anchor-placement='top-bottom'
       className='w-full mb-4 overflow-hidden shadow-md border dark:border-black rounded-xl bg-white dark:bg-hexo-black-gray'>
       {/* 固定高度 ，空白用图片拉升填充 */}
-      <header className='group flex flex-col h-80 justify-between'>
+      <header className='group flex flex-col h-64 justify-between'>
         {/* 头部图片 填充卡片 */}
         {showPageCover && (
           <SmartLink href={post?.href} passHref legacyBehavior>
-            <div className='flex flex-grow w-full relative duration-200 = rounded-t-md cursor-pointer transform overflow-hidden'>
+            <div className='flex w-full h-40 relative duration-200 rounded-t-md cursor-pointer transform overflow-hidden'>
               <LazyImage
                 src={post?.pageCoverThumbnail}
                 alt={post.title}
                 className='h-full w-full group-hover:scale-125 group-hover:brightness-50 rounded-t-md transform object-cover duration-500'
               />
-              <h2 className='absolute bottom-0 left-0 text-white p-6 text-2xl replace break-words w-full shadow-text z-30'>
+              <h2 className='absolute bottom-0 left-0 text-white p-4 text-xl replace break-words w-full shadow-text z-30 line-clamp-2'>
                 {siteConfig('POST_TITLE_ICON') && (
                   <NotionIcon icon={post.pageIcon} />
                 )}
@@ -62,7 +62,7 @@ const BlogPostCard = ({ index, post, showSummary, siteInfo }) => {
           {/* 描述 */}
           <div className='px-4 flex flex-col w-full  text-gray-700  dark:text-gray-300'>
             {(!showPreview || showSummary) && post.summary && (
-              <p className='replace my-2 text-sm font-light leading-7 line-clamp-3'>
+              <p className='replace my-1 text-sm font-light leading-5 line-clamp-2'>
                 {post.summary}
               </p>
             )}

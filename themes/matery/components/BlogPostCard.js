@@ -126,4 +126,3 @@ const BlogPostCard = ({ index, post, showSummary, siteInfo }) => {
   )
 }
 
-export default BlogPostCard

@@ -53,21 +53,23 @@ const BlogPostCard = ({ index, post, showSummary, siteInfo }) => {
         <main className='flex flex-col flex-grow'>
           <div className='p-3 md:p-4 flex flex-col flex-grow w-full text-gray-700 dark:text-gray-300'>
             
-            {/* Título movido aquí abajo y centrado */}
+            {/* Título con Logo fijo a la izquierda (Alineación Flex) */}
             <SmartLink href={post?.href} passHref legacyBehavior>
-              <h2 className='text-center text-gray-900 dark:text-gray-100 text-sm md:text-base font-semibold line-clamp-2 leading-tight mb-2 cursor-pointer hover:text-indigo-600 dark:hover:text-indigo-400'>
+              <div className='flex items-start justify-center mb-2 cursor-pointer group'>
                 {siteConfig('POST_TITLE_ICON') && (
-                  <span className='mr-1 inline-block'>
+                  <div className='mr-2 mt-0.5 flex-shrink-0 text-base md:text-lg'>
                     <NotionIcon icon={post.pageIcon} />
-                  </span>
+                  </div>
                 )}
-                {post.title}
-              </h2>
+                <h2 className='text-left text-gray-900 dark:text-gray-100 text-sm md:text-base font-semibold line-clamp-2 leading-tight group-hover:text-indigo-600 dark:group-hover:text-indigo-400'>
+                  {post.title}
+                </h2>
+              </div>
             </SmartLink>
 
-            {/* 描述 (Resumen oculto en móvil y centrado) */}
+            {/* 描述 (Resumen oculto en móvil, alineado a la izquierda) */}
             {(!showPreview || showSummary) && post.summary && (
-              <p className='text-center hidden md:block replace my-1 text-sm font-light leading-5 line-clamp-2 text-gray-600 dark:text-gray-400'>
+              <p className='hidden md:block replace my-1 text-sm font-light leading-5 line-clamp-2 text-gray-600 dark:text-gray-400'>
                 {post.summary}
               </p>
             )}

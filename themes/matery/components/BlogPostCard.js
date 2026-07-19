@@ -53,23 +53,23 @@ const BlogPostCard = ({ index, post, showSummary, siteInfo }) => {
         <main className='flex flex-col flex-grow'>
           <div className='p-3 md:p-4 flex flex-col flex-grow w-full text-gray-700 dark:text-gray-300'>
             
-            {/* Título con Logo fijo a la izquierda (Alineación Flex) */}
+            {/* Título y Logo apilados verticalmente (Estilo App Store) */}
             <SmartLink href={post?.href} passHref legacyBehavior>
-              <div className='flex items-start justify-center mb-2 cursor-pointer group'>
+              <div className='flex flex-col items-center justify-center text-center cursor-pointer group mb-2'>
                 {siteConfig('POST_TITLE_ICON') && (
-                  <div className='mr-2 mt-0.5 flex-shrink-0 text-base md:text-lg'>
+                  <div className='mb-1.5 text-2xl flex-shrink-0 transition-transform duration-200 group-hover:scale-110'>
                     <NotionIcon icon={post.pageIcon} />
                   </div>
                 )}
-                <h2 className='text-left text-gray-900 dark:text-gray-100 text-sm md:text-base font-semibold line-clamp-2 leading-tight group-hover:text-indigo-600 dark:group-hover:text-indigo-400'>
+                <h2 className='text-center w-full text-gray-900 dark:text-gray-100 text-sm md:text-base font-semibold line-clamp-2 leading-tight group-hover:text-indigo-600 dark:group-hover:text-indigo-400'>
                   {post.title}
                 </h2>
               </div>
             </SmartLink>
 
-            {/* 描述 (Resumen oculto en móvil, alineado a la izquierda) */}
+            {/* 描述 (Resumen oculto en móvil, centrado para mantener simetría) */}
             {(!showPreview || showSummary) && post.summary && (
-              <p className='hidden md:block replace my-1 text-sm font-light leading-5 line-clamp-2 text-gray-600 dark:text-gray-400'>
+              <p className='text-center hidden md:block replace my-1 text-sm font-light leading-5 line-clamp-2 text-gray-600 dark:text-gray-400'>
                 {post.summary}
               </p>
             )}

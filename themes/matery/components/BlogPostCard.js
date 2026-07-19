@@ -36,45 +36,52 @@ const BlogPostCard = ({ index, post, showSummary, siteInfo }) => {
       {/* Contenedor principal de la tarjeta */}
       <header className='group flex flex-col h-full justify-between'>
         
-        {/* 头部图片 填充卡片 (Solo la imagen, sin texto ni sombras) */}
+        {/* 头部图片 (Fondo de la interfaz del software) */}
         {showPageCover && (
           <SmartLink href={post?.href} passHref legacyBehavior>
-            <div className='flex w-full h-40 md:h-48 relative duration-200 rounded-t-md cursor-pointer transform overflow-hidden bg-gray-100 dark:bg-gray-800'>
+            <div className='flex w-full h-40 md:h-48 relative duration-200 rounded-t-xl cursor-pointer transform overflow-hidden bg-gray-100 dark:bg-gray-800'>
               <LazyImage
                 src={post?.pageCoverThumbnail}
                 alt={post.title}
-                className='h-full w-full group-hover:scale-105 group-hover:brightness-90 rounded-t-md transform object-cover duration-500'
+                className='h-full w-full group-hover:scale-105 group-hover:brightness-90 rounded-t-xl transform object-cover duration-500'
               />
             </div>
           </SmartLink>
         )}
 
-        {/* 文字描述 (Área blanca de texto) */}
-        <main className='flex flex-col flex-grow'>
-          <div className='p-3 md:p-4 flex flex-col flex-grow w-full text-gray-700 dark:text-gray-300'>
-            
-            {/* Título y Logo apilados verticalmente (Estilo App Store) */}
-            <SmartLink href={post?.href} passHref legacyBehavior>
-              <div className='flex flex-col items-center justify-center text-center cursor-pointer group mb-2'>
-                {siteConfig('POST_TITLE_ICON') && (
-                  <div className='mb-1.5 text-2xl flex-shrink-0 transition-transform duration-200 group-hover:scale-110'>
+        {/* Área inferior blanca de texto e iconos */}
+        <main className='flex flex-col flex-grow relative'>
+          
+          {/* LOGO SUPERPUESTO (Efecto App Store / macOS) */}
+          {siteConfig('POST_TITLE_ICON') && (
+            <div className='flex justify-center -mt-10 relative z-10'>
+              <SmartLink href={post?.href} passHref legacyBehavior>
+                <div className='w-20 h-20 bg-white dark:bg-hexo-black-gray shadow-lg rounded-2xl flex items-center justify-center cursor-pointer transition-transform duration-300 group-hover:-translate-y-1 border border-gray-100 dark:border-gray-800'>
+                  <div className='text-4xl flex-shrink-0'>
                     <NotionIcon icon={post.pageIcon} />
                   </div>
-                )}
-                <h2 className='text-center w-full text-gray-900 dark:text-gray-100 text-sm md:text-base font-semibold line-clamp-2 leading-tight group-hover:text-indigo-600 dark:group-hover:text-indigo-400'>
-                  {post.title}
-                </h2>
-              </div>
+                </div>
+              </SmartLink>
+            </div>
+          )}
+
+          <div className='p-3 md:p-4 pt-3 flex flex-col flex-grow w-full text-gray-700 dark:text-gray-300'>
+            
+            {/* Título centrado debajo del logo */}
+            <SmartLink href={post?.href} passHref legacyBehavior>
+              <h2 className='text-center w-full text-gray-900 dark:text-gray-100 text-sm md:text-base font-bold line-clamp-2 leading-tight mb-2 cursor-pointer hover:text-indigo-600 dark:hover:text-indigo-400'>
+                {post.title}
+              </h2>
             </SmartLink>
 
-            {/* 描述 (Resumen oculto en móvil, centrado para mantener simetría) */}
+            {/* Resumen */}
             {(!showPreview || showSummary) && post.summary && (
               <p className='text-center hidden md:block replace my-1 text-sm font-light leading-5 line-clamp-2 text-gray-600 dark:text-gray-400'>
                 {post.summary}
               </p>
             )}
 
-            {/* Fecha y Categoría (Alineados siempre al fondo) */}
+            {/* Fecha y Categoría (Tu contenido actual intacto) */}
             <div className='text-gray-500 dark:text-gray-400 justify-between flex mt-auto pt-3 items-end'>
               <div>
                 <span className='font-light text-xs leading-4 mr-1 md:mr-3 flex items-center'>
@@ -91,18 +98,18 @@ const BlogPostCard = ({ index, post, showSummary, siteInfo }) => {
               <SmartLink
                 href={`/category/${post.category}`}
                 passHref
-                className='cursor-pointer font-medium text-xs hover:underline hover:text-indigo-600 dark:hover:text-indigo-400 transform whitespace-nowrap bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded'>
+                className='cursor-pointer font-medium text-xs hover:underline hover:text-indigo-600 dark:hover:text-indigo-400 transform whitespace-nowrap bg-indigo-50 text-indigo-500 dark:bg-indigo-900/30 dark:text-indigo-300 px-3 py-1 rounded-full'>
                 <i className='mr-1 far fa-folder' />
                 {post.category}
               </SmartLink>
             </div>
           </div>
 
-          {/* Tags (Si existen) */}
+          {/* Tags */}
           {post?.tagItems && post?.tagItems.length > 0 && (
             <>
               <hr className='border-gray-100 dark:border-gray-800' />
-              <div className='text-gray-400 justify-between flex px-4 py-2'>
+              <div className='text-gray-400 justify-between flex px-4 py-3'>
                 <div className='md:flex-nowrap flex-wrap md:justify-start inline-block'>
                   <div>
                     {post.tagItems.map(tag => (

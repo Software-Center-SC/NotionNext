@@ -52,12 +52,12 @@ const BlogPostCard = ({ index, post, showSummary, siteInfo }) => {
         {/* Área inferior blanca de texto e iconos */}
         <main className='flex flex-col flex-grow relative'>
           
-          {/* LOGO SUPERPUESTO (Efecto App Store / macOS) */}
+          {/* LOGO SUPERPUESTO (Efecto App Store / macOS ajustado) */}
           {siteConfig('POST_TITLE_ICON') && (
-            <div className='flex justify-center -mt-10 relative z-10'>
+            <div className='flex justify-center -mt-6 relative z-10'>
               <SmartLink href={post?.href} passHref legacyBehavior>
-                <div className='w-20 h-20 bg-white dark:bg-hexo-black-gray shadow-lg rounded-2xl flex items-center justify-center cursor-pointer transition-transform duration-300 group-hover:-translate-y-1 border border-gray-100 dark:border-gray-800'>
-                  <div className='text-4xl flex-shrink-0'>
+                <div className='w-12 h-12 bg-white dark:bg-hexo-black-gray shadow-md rounded-xl flex items-center justify-center cursor-pointer transition-transform duration-300 group-hover:-translate-y-1 border border-gray-100 dark:border-gray-800 overflow-hidden'>
+                  <div className='text-3xl flex-shrink-0'>
                     <NotionIcon icon={post.pageIcon} />
                   </div>
                 </div>

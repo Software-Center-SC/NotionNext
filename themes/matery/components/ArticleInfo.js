@@ -1,7 +1,7 @@
 import SmartLink from '@/components/SmartLink'
 import { useGlobal } from '@/lib/global'
 import TagItemMiddle from './TagItemMiddle'
-// Eliminamos la importación de WordCount porque no lo necesitamos para software
+import { formatDateFmt } from '@/lib/utils/formatDate' // Restauramos esta herramienta
 
 export const ArticleInfo = props => {
   const { post } = props
@@ -25,7 +25,7 @@ export const ArticleInfo = props => {
           <>
             {/* Fecha de Lanzamiento / Publicación */}
             <SmartLink
-              href={`/archive#${post?.publishDate?.substring(0, 7)}`}
+              href={`/archive#${formatDateFmt(post?.publishDate, 'yyyy-MM')}`} // Solución aplicada aquí
               passHref
               className='cursor-pointer flex items-center gap-1.5 hover:text-indigo-500 transition-colors'>
               <i className='fas fa-rocket text-indigo-400' />

@@ -24,6 +24,10 @@ const BlogPostCard = ({ index, post, showSummary, siteInfo }) => {
     post?.pageCoverThumbnail
   const delay = (index % 3) * 300
 
+  // Detectar "Top" y "Nuevo"
+  const isTop = post?.tags?.includes('Top') || post?.tagItems?.some(tag => tag.name?.toLowerCase() === 'top')
+  const isNuevo = post?.tags?.includes('Nuevo') || post?.tagItems?.some(tag => tag.name?.toLowerCase() === 'nuevo')
+
   return (
     <div
       data-aos='zoom-in'
@@ -31,8 +35,20 @@ const BlogPostCard = ({ index, post, showSummary, siteInfo }) => {
       data-aos-delay={delay}
       data-aos-once='true'
       data-aos-anchor-placement='top-bottom'
-      className='w-full mb-4 overflow-hidden shadow-md border dark:border-black rounded-xl bg-white dark:bg-hexo-black-gray flex flex-col h-full'>
+      // Añadido 'relative' para anclar la cinta a la tarjeta
+      className='w-full mb-4 overflow-hidden shadow-md border dark:border-black rounded-xl bg-white dark:bg-hexo-black-gray flex flex-col h-full relative'>
       
+      {/* CINTA (RIBBON) ESQUINERA SUPERIOR DERECHA */}
+      {(isTop || isNuevo) && (
+        <div className='absolute top-0 right-0 w-28 h-28 z-20 pointer-events-none'>
+          <div className={`absolute top-5 -right-8 w-36 text-center transform rotate-45 font-bold py-1 shadow-md text-xs tracking-wider uppercase ${
+              isTop ? 'bg-yellow-500 text-yellow-900' : 'bg-red-500 text-white'
+            }`}>
+            {isTop ? 'TOP' : 'NUEVO'}
+          </div>
+        </div>
+      )}
+
       {/* Contenedor principal de la tarjeta */}
       <header className='group flex flex-col h-full justify-between'>
         

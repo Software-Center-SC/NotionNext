@@ -52,14 +52,13 @@ const BlogPostCard = ({ index, post, showSummary, siteInfo }) => {
         {/* Área inferior blanca de texto e iconos */}
         <main className='flex flex-col flex-grow relative'>
           
-          {/* LOGO SUPERPUESTO (Centrado milimétrico y bordes fijos) */}
+          {/* LOGO SUPERPUESTO (Centrado Forzado Estricto) */}
           {siteConfig('POST_TITLE_ICON') && (
             <div className='flex justify-center -mt-6 relative z-10'>
               <SmartLink href={post?.href} passHref legacyBehavior>
-                {/* Añadido p-1 para forzar la línea fina blanca */}
-                <div className='w-12 h-12 p-1 bg-white dark:bg-hexo-black-gray shadow-md rounded-xl flex items-center justify-center cursor-pointer transition-transform duration-300 group-hover:-translate-y-1 border border-gray-100 dark:border-gray-800 overflow-hidden'>
-                  {/* Reglas estrictas para que la imagen se adapte perfectamente al centro sin deformarse */}
-                  <div className='w-full h-full flex items-center justify-center text-2xl leading-none [&_img]:w-full [&_img]:h-full [&_img]:object-contain'>
+                <div className='w-12 h-12 bg-white dark:bg-hexo-black-gray shadow-md rounded-xl flex items-center justify-center cursor-pointer transition-transform duration-300 group-hover:-translate-y-1 border border-gray-100 dark:border-gray-800'>
+                  {/* "Jaula" que anula los estilos por defecto de Notion */}
+                  <div className='flex items-center justify-center w-8 h-8 [&_.notion-icon]:!m-0 [&_.notion-icon]:!block [&_.notion-icon]:!w-full [&_.notion-icon]:!h-full [&_img]:!object-contain text-3xl leading-none'>
                     <NotionIcon icon={post.pageIcon} />
                   </div>
                 </div>
@@ -83,7 +82,7 @@ const BlogPostCard = ({ index, post, showSummary, siteInfo }) => {
               </p>
             )}
 
-            {/* Fecha y Categoría (Tu contenido actual intacto) */}
+            {/* Fecha y Categoría */}
             <div className='text-gray-500 dark:text-gray-400 justify-between flex mt-auto pt-3 items-end'>
               <div>
                 <span className='font-light text-xs leading-4 mr-1 md:mr-3 flex items-center'>

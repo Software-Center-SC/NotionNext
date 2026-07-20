@@ -58,8 +58,8 @@ const BlogPostCard = ({ index, post, showSummary, siteInfo }) => {
               <SmartLink href={post?.href} passHref legacyBehavior>
                 <div className='w-12 h-12 bg-white dark:bg-hexo-black-gray shadow-md rounded-xl cursor-pointer transition-transform duration-300 group-hover:-translate-y-1 border border-gray-100 dark:border-gray-800 relative overflow-hidden'>
                   
-                  {/* Jaula de posicionamiento absoluto: anula cualquier margen fantasma */}
-                  <div className='absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-8 h-8 flex items-center justify-center [&_.notion-icon]:!m-0 [&_.notion-icon]:!block [&_.notion-icon]:!w-full [&_.notion-icon]:!h-full [&_img]:!m-0 [&_img]:!w-full [&_img]:!h-full [&_img]:!object-contain text-3xl leading-none'>
+                  {/* Jaula de posicionamiento absoluto: logo aumentado a w-10 h-10 */}
+                  <div className='absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-10 h-10 flex items-center justify-center [&_.notion-icon]:!m-0 [&_.notion-icon]:!block [&_.notion-icon]:!w-full [&_.notion-icon]:!h-full [&_img]:!m-0 [&_img]:!w-full [&_img]:!h-full [&_img]:!object-contain text-4xl leading-none'>
                     <NotionIcon icon={post.pageIcon} />
                   </div>
 

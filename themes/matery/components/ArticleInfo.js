@@ -6,6 +6,12 @@ export const ArticleInfo = props => {
   const { post } = props
   const { locale } = useGlobal()
 
+  // Capturamos las propiedades tanto si vienen directas como si están en el sistema de Notion
+  const categoria = post?.category || post?.Category
+  const plataforma = post?.Plataforma || post?.plataforma || post?.properties?.Plataforma?.value
+  const precio = post?.Precio || post?.precio || post?.properties?.Precio?.value
+  const version = post?.Versión || post?.version || post?.Version || post?.properties?.Versión?.value
+
   return (
     <section className='mt-8 mb-8 flex justify-center'>
       {/* Contenedor principal de la tabla (Estilo Tarjeta) */}
@@ -13,8 +19,8 @@ export const ArticleInfo = props => {
         
         <div className='flex flex-col divide-y divide-gray-100 dark:divide-gray-800'>
           
-          {/* 1. FILA: CATEGORÍA (Nativa de NotionNext) */}
-          {post?.category && (
+          {/* 1. FILA: CATEGORÍA */}
+          {categoria && (
             <div className='py-4 px-2 flex items-center justify-between'>
               <div className='flex items-center text-gray-500 dark:text-gray-400'>
                 <i className='fas fa-layer-group w-6 text-center mr-2'></i>
@@ -22,39 +28,39 @@ export const ArticleInfo = props => {
               </div>
               <div>
                 <SmartLink
-                  href={`/category/${post.category}`}
+                  href={`/category/${categoria}`}
                   className='px-3 py-1 text-xs md:text-sm font-medium rounded-full bg-indigo-50 text-indigo-600 dark:bg-indigo-900/30 dark:text-indigo-300 hover:underline'>
-                  {post.category}
+                  {categoria}
                 </SmartLink>
               </div>
             </div>
           )}
 
-          {/* 2. FILA: PLATAFORMA (Multi-select de Notion) */}
-          {post?.plataforma && (
+          {/* 2. FILA: PLATAFORMA */}
+          {plataforma && (
             <div className='py-4 px-2 flex items-center justify-between'>
               <div className='flex items-center text-gray-500 dark:text-gray-400'>
                 <i className='fas fa-desktop w-6 text-center mr-2'></i>
                 <span className='font-medium text-sm md:text-base'>Plataforma</span>
               </div>
               <div className='flex flex-wrap gap-2 justify-end'>
-                {Array.isArray(post.plataforma) ? (
-                  post.plataforma.map((plat, idx) => (
+                {Array.isArray(plataforma) ? (
+                  plataforma.map((plat, idx) => (
                     <span key={idx} className='px-3 py-1 text-xs md:text-sm font-medium rounded-lg bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-300'>
-                      {plat}
+                      {typeof plat === 'object' ? plat.name : plat}
                     </span>
                   ))
                 ) : (
                   <span className='px-3 py-1 text-xs md:text-sm font-medium rounded-lg bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-300'>
-                    {post.plataforma}
+                    {plataforma}
                   </span>
                 )}
               </div>
             </div>
           )}
 
-          {/* 3. FILA: PRECIO (Texto de Notion) */}
-          {post?.precio && (
+          {/* 3. FILA: PRECIO */}
+          {precio && (
             <div className='py-4 px-2 flex items-center justify-between'>
               <div className='flex items-center text-gray-500 dark:text-gray-400'>
                 <i className='fas fa-tag w-6 text-center mr-2'></i>
@@ -62,14 +68,14 @@ export const ArticleInfo = props => {
               </div>
               <div>
                 <span className='px-4 py-1 text-xs md:text-sm font-bold rounded-full bg-green-100 text-green-700 dark:bg-green-900/40 dark:text-green-400'>
-                  {post.precio}
+                  {typeof precio === 'object' ? precio.name || precio.string : precio}
                 </span>
               </div>
             </div>
           )}
 
-          {/* 4. FILA: VERSIÓN Y FECHA (Texto de Notion) */}
-          {post?.version && (
+          {/* 4. FILA: VERSIÓN Y FECHA */}
+          {version && (
             <div className='py-4 px-2 flex items-center justify-between'>
               <div className='flex items-center text-gray-500 dark:text-gray-400'>
                 <i className='fas fa-code-branch w-6 text-center mr-2'></i>
@@ -77,7 +83,7 @@ export const ArticleInfo = props => {
               </div>
               <div className='text-right'>
                 <div className='text-gray-900 dark:text-gray-100 font-semibold text-sm md:text-base'>
-                  {post.version}
+                  {typeof version === 'object' ? version.name || version.string : version}
                 </div>
                 <div className='text-gray-400 text-xs mt-1'>
                   Actualizado: {post?.lastEditedDay}

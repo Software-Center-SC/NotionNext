@@ -1,54 +1,92 @@
 import SmartLink from '@/components/SmartLink'
 import { useGlobal } from '@/lib/global'
 import TagItemMiddle from './TagItemMiddle'
-import { formatDateFmt } from '@/lib/utils/formatDate' // Restauramos esta herramienta
 
 export const ArticleInfo = props => {
   const { post } = props
   const { locale } = useGlobal()
 
   return (
-    <section className='mt-2 mb-8 flex flex-col items-center justify-center text-gray-600 dark:text-gray-300'>
-      
-      {/* 1. Categorías del Software (Centradas y destacadas) */}
-      {post.tagItems && post.tagItems.length > 0 && (
-        <div className='flex flex-wrap justify-center gap-2 mb-5'>
-          {post.tagItems.map(tag => (
-            <TagItemMiddle key={tag.name} tag={tag} />
-          ))}
+    <section className='mt-8 mb-8 flex justify-center'>
+      {/* Contenedor principal de la tabla (Estilo Tarjeta) */}
+      <div className='w-full max-w-2xl bg-white dark:bg-hexo-black-gray rounded-2xl shadow-sm border border-gray-100 dark:border-gray-800 p-2 md:p-6'>
+        
+        <div className='flex flex-col divide-y divide-gray-100 dark:divide-gray-800'>
+          
+          {/* 1. FILA: CATEGORÍA (Nativa de NotionNext) */}
+          {post?.category && (
+            <div className='py-4 px-2 flex items-center justify-between'>
+              <div className='flex items-center text-gray-500 dark:text-gray-400'>
+                <i className='fas fa-layer-group w-6 text-center mr-2'></i>
+                <span className='font-medium text-sm md:text-base'>Categoría</span>
+              </div>
+              <div>
+                <SmartLink
+                  href={`/category/${post.category}`}
+                  className='px-3 py-1 text-xs md:text-sm font-medium rounded-full bg-indigo-50 text-indigo-600 dark:bg-indigo-900/30 dark:text-indigo-300 hover:underline'>
+                  {post.category}
+                </SmartLink>
+              </div>
+            </div>
+          )}
+
+          {/* 2. FILA: PLATAFORMA (Multi-select de Notion) */}
+          {post?.plataforma && (
+            <div className='py-4 px-2 flex items-center justify-between'>
+              <div className='flex items-center text-gray-500 dark:text-gray-400'>
+                <i className='fas fa-desktop w-6 text-center mr-2'></i>
+                <span className='font-medium text-sm md:text-base'>Plataforma</span>
+              </div>
+              <div className='flex flex-wrap gap-2 justify-end'>
+                {Array.isArray(post.plataforma) ? (
+                  post.plataforma.map((plat, idx) => (
+                    <span key={idx} className='px-3 py-1 text-xs md:text-sm font-medium rounded-lg bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-300'>
+                      {plat}
+                    </span>
+                  ))
+                ) : (
+                  <span className='px-3 py-1 text-xs md:text-sm font-medium rounded-lg bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-300'>
+                    {post.plataforma}
+                  </span>
+                )}
+              </div>
+            </div>
+          )}
+
+          {/* 3. FILA: PRECIO (Texto de Notion) */}
+          {post?.precio && (
+            <div className='py-4 px-2 flex items-center justify-between'>
+              <div className='flex items-center text-gray-500 dark:text-gray-400'>
+                <i className='fas fa-tag w-6 text-center mr-2'></i>
+                <span className='font-medium text-sm md:text-base'>Precio</span>
+              </div>
+              <div>
+                <span className='px-4 py-1 text-xs md:text-sm font-bold rounded-full bg-green-100 text-green-700 dark:bg-green-900/40 dark:text-green-400'>
+                  {post.precio}
+                </span>
+              </div>
+            </div>
+          )}
+
+          {/* 4. FILA: VERSIÓN Y FECHA (Texto de Notion) */}
+          {post?.version && (
+            <div className='py-4 px-2 flex items-center justify-between'>
+              <div className='flex items-center text-gray-500 dark:text-gray-400'>
+                <i className='fas fa-code-branch w-6 text-center mr-2'></i>
+                <span className='font-medium text-sm md:text-base'>Versión</span>
+              </div>
+              <div className='text-right'>
+                <div className='text-gray-900 dark:text-gray-100 font-semibold text-sm md:text-base'>
+                  {post.version}
+                </div>
+                <div className='text-gray-400 text-xs mt-1'>
+                  Actualizado: {post?.lastEditedDay}
+                </div>
+              </div>
+            </div>
+          )}
+
         </div>
-      )}
-
-      {/* 2. Barra de Especificaciones Técnicas (Ficha de la App) */}
-      <div className='flex flex-wrap items-center justify-center gap-4 text-xs md:text-sm bg-gray-50 dark:bg-gray-800 px-6 py-3 rounded-2xl border border-gray-100 dark:border-gray-700 shadow-sm'>
-        {post?.type !== 'Page' && (
-          <>
-            {/* Fecha de Lanzamiento / Publicación */}
-            <SmartLink
-              href={`/archive#${formatDateFmt(post?.publishDate, 'yyyy-MM')}`} // Solución aplicada aquí
-              passHref
-              className='cursor-pointer flex items-center gap-1.5 hover:text-indigo-500 transition-colors'>
-              <i className='fas fa-rocket text-indigo-400' />
-              <span className='font-semibold'>Lanzamiento:</span> {post?.publishDay}
-            </SmartLink>
-
-            <span className='w-px h-4 bg-gray-300 dark:bg-gray-600 hidden md:block'></span>
-
-            {/* Última Actualización */}
-            <span className='flex items-center gap-1.5'>
-              <i className='fas fa-sync-alt text-green-500' />
-              <span className='font-semibold'>Actualizado:</span> {post.lastEditedDay}
-            </span>
-
-            <span className='w-px h-4 bg-gray-300 dark:bg-gray-600 hidden md:block'></span>
-
-            {/* Visitas (actuando como indicador de popularidad) */}
-            <span className='hidden busuanzi_container_page_pv flex items-center gap-1.5'>
-              <i className='fas fa-fire text-orange-500' />
-              <span className='font-semibold'>Interés:</span> <span className='busuanzi_value_page_pv' />
-            </span>
-          </>
-        )}
       </div>
     </section>
   )

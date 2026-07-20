@@ -1,45 +1,52 @@
 import SmartLink from '@/components/SmartLink'
 import { useGlobal } from '@/lib/global'
 import TagItemMiddle from './TagItemMiddle'
-import { formatDateFmt } from '@/lib/utils/formatDate'
-import WordCount from '@/components/WordCount'
+// Eliminamos la importación de WordCount porque no lo necesitamos para software
 
 export const ArticleInfo = props => {
   const { post } = props
-
   const { locale } = useGlobal()
 
   return (
-    <section className='mb-3 dark:text-gray-200'>
-      <div className='my-3'>
-        {post.tagItems && (
-          <div className='flex flex-nowrap overflow-x-auto'>
-            {post.tagItems.map(tag => (
-              <TagItemMiddle key={tag.name} tag={tag} />
-            ))}
-          </div>
-        )}
-      </div>
+    <section className='mt-2 mb-8 flex flex-col items-center justify-center text-gray-600 dark:text-gray-300'>
+      
+      {/* 1. Categorías del Software (Centradas y destacadas) */}
+      {post.tagItems && post.tagItems.length > 0 && (
+        <div className='flex flex-wrap justify-center gap-2 mb-5'>
+          {post.tagItems.map(tag => (
+            <TagItemMiddle key={tag.name} tag={tag} />
+          ))}
+        </div>
+      )}
 
-      <div className='flex flex-wrap gap-3 mt-5 text-sm'>
+      {/* 2. Barra de Especificaciones Técnicas (Ficha de la App) */}
+      <div className='flex flex-wrap items-center justify-center gap-4 text-xs md:text-sm bg-gray-50 dark:bg-gray-800 px-6 py-3 rounded-2xl border border-gray-100 dark:border-gray-700 shadow-sm'>
         {post?.type !== 'Page' && (
           <>
+            {/* Fecha de Lanzamiento / Publicación */}
             <SmartLink
-              href={`/archive#${formatDateFmt(post?.publishDate, 'yyyy-MM')}`}
+              href={`/archive#${post?.publishDate?.substring(0, 7)}`}
               passHref
-              className='cursor-pointer whitespace-nowrap'>
-              <i className='far fa-calendar-minus fa-fw' />{' '}
-              {locale.COMMON.POST_TIME}: {post?.publishDay}
+              className='cursor-pointer flex items-center gap-1.5 hover:text-indigo-500 transition-colors'>
+              <i className='fas fa-rocket text-indigo-400' />
+              <span className='font-semibold'>Lanzamiento:</span> {post?.publishDay}
             </SmartLink>
-            <span className='whitespace-nowrap'>
-              <i className='far fa-calendar-check fa-fw' />
-              {locale.COMMON.LAST_EDITED_TIME}: {post.lastEditedDay}
+
+            <span className='w-px h-4 bg-gray-300 dark:bg-gray-600 hidden md:block'></span>
+
+            {/* Última Actualización */}
+            <span className='flex items-center gap-1.5'>
+              <i className='fas fa-sync-alt text-green-500' />
+              <span className='font-semibold'>Actualizado:</span> {post.lastEditedDay}
             </span>
-            <span className='hidden busuanzi_container_page_pv font-light mr-2'>
-              <i className='mr-1 fas fa-eye' />
-              <span className='busuanzi_value_page_pv' />
+
+            <span className='w-px h-4 bg-gray-300 dark:bg-gray-600 hidden md:block'></span>
+
+            {/* Visitas (actuando como indicador de popularidad) */}
+            <span className='hidden busuanzi_container_page_pv flex items-center gap-1.5'>
+              <i className='fas fa-fire text-orange-500' />
+              <span className='font-semibold'>Interés:</span> <span className='busuanzi_value_page_pv' />
             </span>
-            <WordCount wordCount={post.wordCount} readTime={post.readTime} />
           </>
         )}
       </div>

@@ -3,27 +3,47 @@ import NotionIcon from '@/components/NotionIcon'
 import { siteConfig } from '@/lib/config'
 
 /**
- * 文章背景图
+ * 文章背景图 (Cabecera del Artículo / Ficha de Software)
  */
 export default function PostHero({ post, siteInfo }) {
   const headerImage = post?.pageCoverThumbnail
     ? post?.pageCoverThumbnail
     : siteInfo?.pageCover
   const title = post?.title
+
   return (
     <div
       id='header'
       className='flex h-96 justify-center align-middle items-center w-full relative bg-black'>
+      
+      {/* Contenedor central (Logo arriba + Título abajo) */}
       <div
         data-wow-delay='.1s'
-        className='wow fadeInUp z-10 leading-snug font-bold xs:text-4xl sm:text-4xl md:text-5xl md:leading-snug text-4xl shadow-text-md flex justify-center text-center text-white'>
-        {siteConfig('POST_TITLE_ICON') && <NotionIcon icon={post?.pageIcon} />}
-        {title}
+        className='wow fadeInUp z-10 flex flex-col items-center justify-center w-full px-4'>
+        
+        {/* LOGO SUPERPUESTO GIGANTE (Ficha Técnica) */}
+        {siteConfig('POST_TITLE_ICON') && post?.pageIcon && (
+          <div className='w-20 h-20 md:w-24 md:h-24 bg-white dark:bg-hexo-black-gray shadow-2xl rounded-2xl mb-5 relative overflow-hidden border border-white/20 dark:border-gray-800'>
+            
+            {/* La jaula de centrado infalible (ajustada a tamaño Hero) */}
+            <div className='absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-16 h-16 md:w-20 md:h-20 flex items-center justify-center [&_.notion-icon]:!m-0 [&_.notion-icon]:!block [&_.notion-icon]:!w-full [&_.notion-icon]:!h-full [&_img]:!m-0 [&_img]:!w-full [&_img]:!h-full [&_img]:!object-contain text-6xl leading-none'>
+              <NotionIcon icon={post?.pageIcon} />
+            </div>
+
+          </div>
+        )}
+
+        {/* TÍTULO DEL SOFTWARE */}
+        <h1 className='leading-snug font-bold xs:text-4xl sm:text-4xl md:text-5xl md:leading-snug text-4xl shadow-text-md text-center text-white'>
+          {title}
+        </h1>
       </div>
+
+      {/* IMAGEN DE FONDO (GUI del programa oscurecida) */}
       <LazyImage
         alt={title}
         src={headerImage}
-        className='pointer-events-none select-none w-full h-full object-cover opacity-30 absolute'
+        className='pointer-events-none select-none w-full h-full object-cover opacity-40 absolute'
         placeholder='blur'
         blurDataURL={siteConfig('IMG_LAZY_LOAD_PLACEHOLDER')}
       />

@@ -5,7 +5,6 @@ import { siteConfig } from '@/lib/config'
 import { formatDateFmt } from '@/lib/utils/formatDate'
 import SmartLink from '@/components/SmartLink'
 import CONFIG from '../config'
-import TagItemMini from './TagItemMini'
 
 /**
  * 博客列表：文章卡牌
@@ -66,7 +65,8 @@ const BlogPostCard = ({ index, post, showSummary, siteInfo }) => {
         )}
 
         {/* Área inferior blanca de texto e iconos */}
-        <main className='flex flex-col flex-grow relative'>
+        {/* Añadido 'pb-4' para darle respiro al fondo ahora que no están las etiquetas */}
+        <main className='flex flex-col flex-grow relative pb-4'>
           
           {/* LOGO SUPERPUESTO (Centrado Absoluto Infalible) */}
           {siteConfig('POST_TITLE_ICON') && (
@@ -123,22 +123,6 @@ const BlogPostCard = ({ index, post, showSummary, siteInfo }) => {
               </SmartLink>
             </div>
           </div>
-
-          {/* Tags */}
-          {post?.tagItems && post?.tagItems.length > 0 && (
-            <>
-              <hr className='border-gray-100 dark:border-gray-800' />
-              <div className='text-gray-400 justify-between flex px-4 py-3'>
-                <div className='md:flex-nowrap flex-wrap md:justify-start inline-block'>
-                  <div>
-                    {post.tagItems.map(tag => (
-                      <TagItemMini key={tag.name} tag={tag} />
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </>
-          )}
         </main>
       </header>
     </div>

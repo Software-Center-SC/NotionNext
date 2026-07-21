@@ -37,10 +37,10 @@ const BlogPostCard = ({ index, post, showSummary, siteInfo }) => {
       // Añadido 'relative' para anclar la cinta a la tarjeta
       className='w-full mb-4 overflow-hidden shadow-md border dark:border-black rounded-xl bg-white dark:bg-hexo-black-gray flex flex-col h-full relative'>
       
-      {/* CINTA (RIBBON) ESQUINERA SUPERIOR DERECHA */}
+      {/* CINTA (RIBBON) ESQUINERA SUPERIOR DERECHA - Ajustada en tamaño */}
       {(isTop || isNuevo) && (
-        <div className='absolute top-0 right-0 w-28 h-28 z-20 pointer-events-none'>
-          <div className={`absolute top-5 -right-8 w-36 text-center transform rotate-45 font-bold py-1 shadow-md text-xs tracking-wider uppercase ${
+        <div className='absolute top-0 right-0 w-24 h-24 z-20 pointer-events-none'>
+          <div className={`absolute top-4 -right-8 w-32 text-center transform rotate-45 font-bold py-1 shadow-md text-[10px] tracking-wider uppercase ${
               isTop ? 'bg-yellow-500 text-yellow-900' : 'bg-red-500 text-white'
             }`}>
             {isTop ? 'TOP' : 'NUEVO'}
@@ -54,7 +54,8 @@ const BlogPostCard = ({ index, post, showSummary, siteInfo }) => {
         {/* 头部图片 (Fondo de la interfaz del software) */}
         {showPageCover && (
           <SmartLink href={post?.href} passHref legacyBehavior>
-            <div className='flex w-full h-40 md:h-48 relative duration-200 rounded-t-xl cursor-pointer transform overflow-hidden bg-gray-100 dark:bg-gray-800'>
+            {/* Altura reducida de h-40/48 a h-32/40 para vista móvil y escritorio */}
+            <div className='flex w-full h-32 md:h-40 relative duration-200 rounded-t-xl cursor-pointer transform overflow-hidden bg-gray-100 dark:bg-gray-800'>
               <LazyImage
                 src={post?.pageCoverThumbnail}
                 alt={post.title}
@@ -68,14 +69,14 @@ const BlogPostCard = ({ index, post, showSummary, siteInfo }) => {
         {/* Añadido 'pb-4' para darle respiro al fondo ahora que no están las etiquetas */}
         <main className='flex flex-col flex-grow relative pb-4'>
           
-          {/* LOGO SUPERPUESTO (Centrado Absoluto Infalible) */}
+          {/* LOGO SUPERPUESTO (Centrado Absoluto Infalible) - Proporcionado a la nueva altura */}
           {siteConfig('POST_TITLE_ICON') && (
-            <div className='flex justify-center -mt-6 relative z-10'>
+            <div className='flex justify-center -mt-5 relative z-10'>
               <SmartLink href={post?.href} passHref legacyBehavior>
-                <div className='w-12 h-12 bg-white dark:bg-hexo-black-gray shadow-md rounded-xl cursor-pointer transition-transform duration-300 group-hover:-translate-y-1 border border-gray-100 dark:border-gray-800 relative overflow-hidden'>
+                <div className='w-10 h-10 bg-white dark:bg-hexo-black-gray shadow-md rounded-xl cursor-pointer transition-transform duration-300 group-hover:-translate-y-1 border border-gray-100 dark:border-gray-800 relative overflow-hidden'>
                   
-                  {/* Jaula de posicionamiento absoluto: logo aumentado a w-10 h-10 */}
-                  <div className='absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-10 h-10 flex items-center justify-center [&_.notion-icon]:!m-0 [&_.notion-icon]:!block [&_.notion-icon]:!w-full [&_.notion-icon]:!h-full [&_img]:!m-0 [&_img]:!w-full [&_img]:!h-full [&_img]:!object-contain text-4xl leading-none'>
+                  {/* Jaula de posicionamiento absoluto: logo a w-8 h-8 */}
+                  <div className='absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-8 h-8 flex items-center justify-center [&_.notion-icon]:!m-0 [&_.notion-icon]:!block [&_.notion-icon]:!w-full [&_.notion-icon]:!h-full [&_img]:!m-0 [&_img]:!w-full [&_img]:!h-full [&_img]:!object-contain text-3xl leading-none'>
                     <NotionIcon icon={post.pageIcon} />
                   </div>
 
@@ -100,8 +101,8 @@ const BlogPostCard = ({ index, post, showSummary, siteInfo }) => {
               </p>
             )}
 
-            {/* Fecha y Categoría */}
-            <div className='text-gray-500 dark:text-gray-400 justify-between flex mt-auto pt-3 items-end'>
+            {/* Fecha y Categoría - LÍNEA SUTIL AÑADIDA (border-t) */}
+            <div className='text-gray-500 dark:text-gray-400 justify-between flex mt-auto pt-3 border-t border-gray-100 dark:border-gray-800 items-end'>
               <div>
                 <span className='font-light text-xs leading-4 mr-1 md:mr-3 flex items-center'>
                   <i className='far fa-clock mr-1' />

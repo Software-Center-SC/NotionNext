@@ -66,8 +66,8 @@ const BlogPostCard = ({ index, post, showSummary, siteInfo }) => {
         )}
 
         {/* Área inferior blanca de texto e iconos */}
-        {/* Añadido 'pb-4' para darle respiro al fondo ahora que no están las etiquetas */}
-        <main className='flex flex-col flex-grow relative pb-4'>
+        {/* Eliminado el 'pb-4' para quitar el hueco sobrante inferior */}
+        <main className='flex flex-col flex-grow relative'>
           
           {/* LOGO SUPERPUESTO (Centrado Absoluto Infalible) - Proporcionado a la nueva altura */}
           {siteConfig('POST_TITLE_ICON') && (
@@ -85,24 +85,26 @@ const BlogPostCard = ({ index, post, showSummary, siteInfo }) => {
             </div>
           )}
 
-          <div className='p-3 md:p-4 pt-3 flex flex-col flex-grow w-full text-gray-700 dark:text-gray-300'>
+          {/* Ajustados los márgenes a px-3 pb-2 pt-2 para que quede menos espacio debajo */}
+          <div className='px-3 md:px-4 pb-2 pt-2 flex flex-col flex-grow w-full text-gray-700 dark:text-gray-300'>
             
             {/* Título centrado debajo del logo */}
             <SmartLink href={post?.href} passHref legacyBehavior>
-              <h2 className='text-center w-full text-gray-900 dark:text-gray-100 text-sm md:text-base font-bold line-clamp-2 leading-tight mb-2 cursor-pointer hover:text-indigo-600 dark:hover:text-indigo-400'>
+              <h2 className='text-center w-full text-gray-900 dark:text-gray-100 text-sm md:text-base font-bold line-clamp-2 leading-tight mb-1 cursor-pointer hover:text-indigo-600 dark:hover:text-indigo-400'>
                 {post.title}
               </h2>
             </SmartLink>
 
             {/* Resumen */}
             {(!showPreview || showSummary) && post.summary && (
-              <p className='text-center hidden md:block replace my-1 text-sm font-light leading-5 line-clamp-2 text-gray-600 dark:text-gray-400'>
+              <p className='text-center hidden md:block replace my-1 text-xs font-light leading-4 line-clamp-2 text-gray-500 dark:text-gray-400'>
                 {post.summary}
               </p>
             )}
 
             {/* Fecha y Categoría - LÍNEA SUTIL AÑADIDA (border-t) */}
-            <div className='text-gray-500 dark:text-gray-400 justify-between flex mt-auto pt-3 border-t border-gray-100 dark:border-gray-800 items-end'>
+            {/* Cambiado el pt-3 a pt-2 para acercar la línea al texto de arriba */}
+            <div className='text-gray-500 dark:text-gray-400 justify-between flex mt-auto pt-2 border-t border-gray-100 dark:border-gray-800 items-end'>
               <div>
                 <span className='font-light text-xs leading-4 mr-1 md:mr-3 flex items-center'>
                   <i className='far fa-clock mr-1' />
@@ -118,7 +120,7 @@ const BlogPostCard = ({ index, post, showSummary, siteInfo }) => {
               <SmartLink
                 href={`/category/${post.category}`}
                 passHref
-                className='cursor-pointer font-medium text-xs hover:underline hover:text-indigo-600 dark:hover:text-indigo-400 transform whitespace-nowrap bg-indigo-50 text-indigo-500 dark:bg-indigo-900/30 dark:text-indigo-300 px-3 py-1 rounded-full'>
+                className='cursor-pointer font-medium text-xs hover:underline hover:text-indigo-600 dark:hover:text-indigo-400 transform whitespace-nowrap bg-indigo-50 text-indigo-500 dark:bg-indigo-900/30 dark:text-indigo-300 px-3 py-0.5 rounded-full'>
                 <i className='mr-1 far fa-folder' />
                 {post.category}
               </SmartLink>

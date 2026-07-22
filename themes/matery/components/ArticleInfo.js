@@ -12,6 +12,14 @@ export const ArticleInfo = props => {
   const precio = post?.Precio || post?.precio || post?.properties?.Precio?.value
   const version = post?.Versión || post?.version || post?.Version || post?.properties?.Versión?.value
 
+  // Lógica de fecha estandarizada: Prioriza tu columna 'date' de Notion (Igual que en la portada)
+  const dateObj = new Date(post?.date?.start_date || post?.lastEditedDay)
+  const formattedDate = dateObj.toLocaleDateString('es-ES', {
+    day: '2-digit',
+    month: '2-digit',
+    year: 'numeric'
+  }).replaceAll('/', '.')
+
   return (
     <section className='mt-8 mb-8 flex justify-center'>
       {/* Contenedor principal de la tabla (Estilo Tarjeta) */}
@@ -74,7 +82,7 @@ export const ArticleInfo = props => {
             </div>
           )}
 
-          {/* 4. FILA: VERSIÓN Y FECHA */}
+          {/* 4. FILA: VERSIÓN Y FECHA (Actualizada) */}
           {version && (
             <div className='py-4 px-2 flex items-center justify-between'>
               <div className='flex items-center text-gray-500 dark:text-gray-400'>
@@ -86,7 +94,8 @@ export const ArticleInfo = props => {
                   {typeof version === 'object' ? version.name || version.string : version}
                 </div>
                 <div className='text-gray-400 text-xs mt-1'>
-                  Actualizado: {post?.lastEditedDay}
+                  {/* Aquí inyectamos la variable estandarizada */}
+                  Actualizado: {formattedDate}
                 </div>
               </div>
             </div>

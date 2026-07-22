@@ -27,13 +27,16 @@ const BlogPostCard = ({ index, post, showSummary, siteInfo }) => {
   const isTop = post?.tags?.includes('Top') || post?.tagItems?.some(tag => tag.name?.toLowerCase() === 'top')
   const isNuevo = post?.tags?.includes('Nuevo') || post?.tagItems?.some(tag => tag.name?.toLowerCase() === 'nuevo')
 
-  // Lógica de fecha estandarizada: Prioriza tu columna 'date' de Notion
-  const dateObj = new Date(post?.date?.start_date || post?.lastEditedDay)
-  const formattedDate = dateObj.toLocaleDateString('es-ES', {
-    day: '2-digit',
-    month: '2-digit',
-    year: 'numeric'
-  }).replaceAll('/', '.')
+  // Lógica de fecha INFALIBLE: Fuerza manualmente el formato DD.MM.YY (ej. 22.07.26)
+  const rawDate = post?.date?.start_date || post?.lastEditedDay
+  let formattedDate = ''
+  if (rawDate) {
+    const dateObj = new Date(rawDate)
+    const year = dateObj.getFullYear().toString().slice(-2) // Extrae solo los 2 últimos dígitos
+    const month = String(dateObj.getMonth() + 1).padStart(2, '0') // Asegura 2 dígitos para el mes
+    const day = String(dateObj.getDate()).padStart(2, '0') // Asegura 2 dígitos para el día
+    formattedDate = `${day}.${month}.${year}`
+  }
 
   return (
     <div
@@ -116,7 +119,7 @@ const BlogPostCard = ({ index, post, showSummary, siteInfo }) => {
               <div>
                 <span className='font-light text-xs leading-4 mr-1 md:mr-3 flex items-center'>
                   <i className='far fa-clock mr-1' />
-                  {/* AQUÍ ESTÁ LA NUEVA FECHA ESTANDARIZADA */}
+                  {/* AQUÍ ESTÁ LA NUEVA FECHA INFALIBLE */}
                   {formattedDate}
                 </span>
                 <TwikooCommentCount

@@ -27,6 +27,14 @@ const BlogPostCard = ({ index, post, showSummary, siteInfo }) => {
   const isTop = post?.tags?.includes('Top') || post?.tagItems?.some(tag => tag.name?.toLowerCase() === 'top')
   const isNuevo = post?.tags?.includes('Nuevo') || post?.tagItems?.some(tag => tag.name?.toLowerCase() === 'nuevo')
 
+  // Lógica de fecha estandarizada: Prioriza tu columna 'date' de Notion
+  const dateObj = new Date(post?.date?.start_date || post?.lastEditedDay)
+  const formattedDate = dateObj.toLocaleDateString('es-ES', {
+    day: '2-digit',
+    month: '2-digit',
+    year: 'numeric'
+  }).replaceAll('/', '.')
+
   return (
     <div
       data-aos='zoom-in'
@@ -108,9 +116,8 @@ const BlogPostCard = ({ index, post, showSummary, siteInfo }) => {
               <div>
                 <span className='font-light text-xs leading-4 mr-1 md:mr-3 flex items-center'>
                   <i className='far fa-clock mr-1' />
-                  {new Date(post.date?.start_date || post.lastEditedDay)
-                    .toLocaleDateString('es-ES')
-                    .replaceAll('/', '.')}
+                  {/* AQUÍ ESTÁ LA NUEVA FECHA ESTANDARIZADA */}
+                  {formattedDate}
                 </span>
                 <TwikooCommentCount
                   post={post}
